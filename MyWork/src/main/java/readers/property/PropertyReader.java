@@ -14,11 +14,11 @@ public class PropertyReader {
     String file;
 
 
-    public static PropertyReader propertyReader() {
-        return propertyReader("config");
+    public static PropertyReader read() {
+        return read("config");
     }
 
-    public static PropertyReader propertyReader(String fileName) {
+    public static PropertyReader read(String fileName) {
         return new PropertyReader(fileName);
     }
 

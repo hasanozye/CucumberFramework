@@ -18,7 +18,7 @@ public class DriverFactory {
 
     public static WebDriver createChrome() {
         ChromeOptions options = new ChromeOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("chrome.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -27,7 +27,7 @@ public class DriverFactory {
 
     public static WebDriver createEdge() {
         EdgeOptions options = new EdgeOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("edge.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -36,7 +36,7 @@ public class DriverFactory {
 
     public static WebDriver createFirefox() {
         FirefoxOptions options = new FirefoxOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         for (String s : pr.get("firefox.options").split(",")) {
             options.addArguments(s.trim());
         }
@@ -48,7 +48,7 @@ public class DriverFactory {
             throw new WebDriverException("Your OS doesn't support Internet Explorer");
         }
         InternetExplorerOptions options = new InternetExplorerOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         return new InternetExplorerDriver();
     }
 
@@ -58,7 +58,7 @@ public class DriverFactory {
             throw new WebDriverException("Your OS doesn't support Safari");
         }
         SafariOptions options = new SafariOptions();
-        PropertyReader pr = PropertyReader.propertyReader();
+        PropertyReader pr = PropertyReader.read();
         options.setCapability("safari.cleanSession", true);
         options.setAutomaticInspection(true);
         options.getUseTechnologyPreview();
