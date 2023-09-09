@@ -95,6 +95,10 @@ public class BaseSteps {
         });
     }
 
+    public By xpath(String xpathStr, String label) {
+        return By.xpath(String.format(xpathStr, label));
+    }
+
     public void waitForVisibility(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
