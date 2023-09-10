@@ -5,10 +5,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import pageobjects.LoginObjects;
 import readers.property.PropertyReader;
 
+import java.security.Key;
 import java.util.Map;
 
 public class LoginSteps extends BaseSteps {
@@ -32,7 +35,7 @@ public class LoginSteps extends BaseSteps {
         click(loginObjects.menuLoginLink);
     }
 
-    @Then("Login page should be visible")
+    @Then("login page should be visible")
     public void loginPageShouldBeVisible() {
         waitForVisibility(loginObjects.loginFormUsername);
     }
@@ -56,5 +59,43 @@ public class LoginSteps extends BaseSteps {
     public void loginShouldBeSuccessfull() {
         waitForVisibility(loginObjects.contentBody);
 
+    }
+
+    @Then("login should be fail")
+    public void loginShouldBeFail() {
+        waitForVisibility(loginObjects.warningAlert);
+        Assert.assertTrue(loginObjects.warningAlert.getText().contains("No match for E-Mail Address"));
+    }
+
+    @When("user clicks forgotten password link")
+    public void userClicksForgottenPasswordLink() {
+        click(loginObjects.forgottenPasswordLink);
+        waitForVisibility(loginObjects.accountForgottenBody);
+
+    }
+
+
+    @When("user fill the email with the following data")
+    public void userFillTheEmailWithTheFollowingData(DataTable table) {
+        Map<String, String> data = table.asMap();
+        String username = data.get("username");
+        sendKeys(loginObjects.loginFormUsername, username);
+    }
+
+    @And("Press Tab keyboard key until the control comes to the {string} text field")
+    public void pressTabKeyboardKeyUntilTheControlComesToTheTextField(String text) {
+        String locator= "//*[contains( @name,'%s')]";
+        xpath(locator, text);
+        By body = By.xpath("//body");
+        /*do {
+            driver.findElement(body).sendKeys(Keys.TAB);
+        }*/
+    }
+
+    @When("user fill the password with the following data")
+    public void userFillThePasswordWithTheFollowingData(DataTable table) {
+        Map<String, String> data = table.asMap();
+        String password = data.get("password");
+        sendKeys(loginObjects.loginFormUsername, password);
     }
 }
