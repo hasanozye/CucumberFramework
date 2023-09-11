@@ -16,7 +16,7 @@ public class Utils {
      * takescreenshots
      */
     public static void takesScreenShot() {
-
+        takeScreenShot("screenshot");
     }
 
     /**
@@ -47,6 +47,15 @@ public class Utils {
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
+    }
+
+    /**
+     * alinan screenshot'i byte[] olarak return eder
+     *
+     * @return screenshot in byte[]
+     */
+    public static byte[] getScreenShotAsByte() {
+        return ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     /**
