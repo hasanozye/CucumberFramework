@@ -29,4 +29,13 @@ public class LoginObjects {
     @FindBy(css = "#content")
     public WebElement contentBody;
 
+    @FindBy(xpath = "//div[contains(@class,'alert')]")
+    public WebElement warningAlert;
+
+    @FindBy(xpath = "//a[text()='Forgotten Password']")
+    public WebElement forgottenPasswordLink;
+
+    @FindBy(css = "#account-forgotten")
+    public WebElement accountForgottenBody;
+
 }
