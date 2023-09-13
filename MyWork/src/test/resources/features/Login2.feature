@@ -18,10 +18,10 @@ Feature: login functionality
       | username           | password | success |
       | deneme@deneme.com  | deneme   | true    |
       |                    |          | false   |
-      | deneme@deneme.com  |          | true    |
+      | deneme@deneme.com  |          | false   |
       |                    | deneme   | false   |
       | deneme1@deneme.com | deneme   | false   |
       | deneme@deneme.com  | deneme1  | false   |
-      | deneme@deneme.com  | deneme   | false   |
+      | deneme@deneme.com  | deneme   | true    |
       | a                  | a        | false   |
 
