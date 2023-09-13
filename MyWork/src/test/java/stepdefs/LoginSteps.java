@@ -12,6 +12,7 @@ import pageobjects.LoginObjects;
 import readers.property.PropertyReader;
 
 import java.security.Key;
+import java.util.List;
 import java.util.Map;
 
 public class LoginSteps extends BaseSteps {
@@ -58,6 +59,7 @@ public class LoginSteps extends BaseSteps {
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
         waitForVisibility(loginObjects.contentBody);
+        Assert.fail();
 
     }
 
@@ -84,7 +86,7 @@ public class LoginSteps extends BaseSteps {
 
     @And("Press Tab keyboard key until the control comes to the {string} text field")
     public void pressTabKeyboardKeyUntilTheControlComesToTheTextField(String text) {
-        String locator= "//*[contains( @name,'%s')]";
+        String locator = "//*[contains( @name,'%s')]";
         xpath(locator, text);
         By body = By.xpath("//body");
         /*do {
@@ -97,5 +99,20 @@ public class LoginSteps extends BaseSteps {
         Map<String, String> data = table.asMap();
         String password = data.get("password");
         sendKeys(loginObjects.loginFormUsername, password);
+    }
+
+    @When("user clicks the following links with text")
+    public void userClicksTheFollowingLinksWithText(DataTable table) {
+        String xpathOfLink = "//a[contains(.,'%s')]";
+        List<String> list = table.asList();
+        for (String text : list) {
+            By locator = By.xpath(String.format(xpathOfLink, text));
+            click(locator);
+        }
+
+    }
+
+    @Then("login should be {string}")
+    public void loginShouldBe(String arg0) {
     }
 }
