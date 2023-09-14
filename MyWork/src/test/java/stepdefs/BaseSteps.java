@@ -103,5 +103,12 @@ public class BaseSteps {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void scrollToElement(WebElement element) {
+        // Use JavaScript to scroll to the element
+        waitForVisibility(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", element);
+
+    }
+
 
 }
