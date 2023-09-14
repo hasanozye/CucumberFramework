@@ -26,8 +26,8 @@ public class LoginObjects {
     @FindBy(xpath = "//input[@value='Login']")
     public WebElement loginFormSubmitButton;
 
-    @FindBy(css = "#content")
-    public WebElement contentBody;
+    @FindBy(xpath = "//h2[text()='My Account']")
+    public WebElement MyAccountSignedIn;
 
     @FindBy(xpath = "//div[contains(@class,'alert')]")
     public WebElement warningAlert;
