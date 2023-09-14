@@ -6,12 +6,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.testng.Assert;
 import pageobjects.LoginObjects;
 import readers.property.PropertyReader;
 
-import java.security.Key;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +42,8 @@ public class LoginSteps extends BaseSteps {
     @When("user fill the login form with the following datas")
     public void userFillTheLoginFormWithTheFollowingDatas(DataTable table) {
         Map<String, String> datas = table.asMap();
-        String username = datas.get("username");
-        String password = datas.get("password");
+        String username = datas.get("username") == null ? "" : datas.get("username");
+        String password = datas.get("password") == null ? "" : datas.get("password");
         sendKeys(loginObjects.loginFormUsername, username);
         sendKeys(loginObjects.loginFormPassword, password);
 
@@ -58,8 +56,7 @@ public class LoginSteps extends BaseSteps {
 
     @Then("login should be successfull")
     public void loginShouldBeSuccessfull() {
-        waitForVisibility(loginObjects.contentBody);
-        Assert.fail();
+        waitForVisibility(loginObjects.MyAccountSignedIn);
 
     }
 
@@ -113,6 +110,11 @@ public class LoginSteps extends BaseSteps {
     }
 
     @Then("login should be {string}")
-    public void loginShouldBe(String arg0) {
+    public void loginShouldBe(String text) {
+        if (text.equalsIgnoreCase("true")) {
+            Assert.assertTrue(loginObjects.MyAccountSignedIn.isDisplayed());
+        } else {
+            Assert.assertTrue(loginObjects.warningAlert.isDisplayed());
+        }
     }
 }
