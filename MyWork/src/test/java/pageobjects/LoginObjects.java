@@ -38,4 +38,25 @@ public class LoginObjects {
     @FindBy(css = "#account-forgotten")
     public WebElement accountForgottenBody;
 
+    @FindBy(css = "input[name='search']")
+    public WebElement searchField;
+
+    @FindBy(xpath = "//div[@id='search']//button[@type='button']")
+    public WebElement searchButton;
+
+    @FindBy(xpath = "//h4")
+    public WebElement displayedProductTitle;
+
+    @FindBy(xpath = "(//button[@data-original-title='Add to Wish List'])[1]")
+    public WebElement addToWishListButton;
+
+    @FindBy(xpath = "//a[text()='wish list']")
+    public WebElement successAddToWishLink;
+
+    @FindBy(xpath = "//div[contains(@class,'alert-success')]")
+    public WebElement successAlertMessage;
+
+    @FindBy(xpath = "//a[text()='iMac']")
+    public WebElement displayedProductOnWishList;
+
 }
