@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginObjects {
+public class PageObjects {
 
-    public LoginObjects() {
+    public PageObjects() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -39,10 +39,13 @@ public class LoginObjects {
     public WebElement accountForgottenBody;
 
     @FindBy(css = "input[name='search']")
-    public WebElement searchField;
+    public WebElement eSearchBoxTop;
 
     @FindBy(xpath = "//div[@id='search']//button[@type='button']")
-    public WebElement searchButton;
+    public WebElement eSearchButtonTop;
+
+    @FindBy(css = "#product-search")
+    public WebElement eSearchContainer;
 
     @FindBy(xpath = "//h4")
     public WebElement displayedProductTitle;
