@@ -1,12 +1,16 @@
 package driver;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static driver.DriverFactory.*;
 
 public class Driver {
 
     private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
+    private static ThreadLocal<WebDriverWait> waits = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
         return getDriver(Browsers.chrome);
@@ -32,7 +36,12 @@ public class Driver {
                 }
             }
         }
+        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));
         return drivers.get();
+    }
+
+    public static WebDriverWait getWait() {
+        return waits.get();
     }
 
     public static void quitDriver() {
