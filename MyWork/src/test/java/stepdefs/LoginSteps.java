@@ -7,7 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import pageobjects.LoginObjects;
+import pageobjects.PageObjects;
 import readers.property.PropertyReader;
 
 import java.util.List;
@@ -15,11 +15,11 @@ import java.util.Map;
 
 public class LoginSteps extends BaseSteps {
 
-    LoginObjects loginObjects;
+    PageObjects loginObjects;
 
     @Given("user on homepage")
     public void userOnHomepage() {
-        loginObjects = new LoginObjects();
+        loginObjects = new PageObjects();
         String url = PropertyReader.read().get("url");
         driver.get(url);
     }
@@ -116,5 +116,41 @@ public class LoginSteps extends BaseSteps {
         } else {
             Assert.assertTrue(loginObjects.warningAlert.isDisplayed());
         }
+    }
+
+    @Then("user clicks on the button having search icon")
+    public void userClicksOnTheButtonHavingSearchIcon() {
+        click(loginObjects.eSearchButtonTop);
+    }
+
+    @And("user clicks on the Product displayed in the Search results")
+    public void userClicksOnTheProductDisplayedInTheSearchResults() {
+        scrollToElement(loginObjects.displayedProductTitle);
+        click(loginObjects.displayedProductTitle);
+    }
+
+    @And("user clicks on Add to Wish List option on a product that is displayed in the Related Products section of Product Display page")
+    public void userClicksOnAddToWishListOptionOnAProductThatIsDisplayedInTheRelatedProductsSectionOfProductDisplayPage() {
+        waitForVisibility(loginObjects.addToWishListButton);
+        click(loginObjects.addToWishListButton);
+        waitForVisibility(loginObjects.successAlertMessage);
+    }
+
+    @And("user clicks on the wish list! link in the displayed success message")
+    public void userClicksOnTheWishListLinkInTheDisplayedSuccessMessage() {
+        click(loginObjects.successAddToWishLink);
+        waitForVisibility(loginObjects.displayedProductOnWishList);
+    }
+
+    @When("user login with username {string} and password {string}")
+    public void userLoginWithUsernameAndPassword(String username, String password) {
+        click(loginObjects.menuMyAccountLink);
+        click(loginObjects.menuLoginLink);
+        waitForVisibility(loginObjects.loginFormUsername);
+        sendKeys(loginObjects.loginFormUsername, username);
+        sendKeys(loginObjects.loginFormPassword, password);
+        click(loginObjects.loginFormSubmitButton);
+
+
     }
 }
