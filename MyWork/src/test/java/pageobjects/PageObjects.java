@@ -62,4 +62,16 @@ public class PageObjects {
     @FindBy(xpath = "//a[text()='iMac']")
     public WebElement displayedProductOnWishList;
 
+    @FindBy(css = "div.alert.alert-success")
+    public WebElement eAlertSuccess;
+
+    @FindBy(xpath = "//a[text()='Your Store']")
+    public WebElement eLogo;
+
+    @FindBy(tagName = "h3")
+    public WebElement featuredSection;
+
+    @FindBy(xpath = "//ul[contains(@class,'navbar')]/descendant::a[contains(.,'Show All Desktops')]")
+    public WebElement showAllDesktops;
+
 }
