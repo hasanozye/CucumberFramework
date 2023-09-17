@@ -118,30 +118,6 @@ public class LoginSteps extends BaseSteps {
         }
     }
 
-    @Then("user clicks on the button having search icon")
-    public void userClicksOnTheButtonHavingSearchIcon() {
-        click(loginObjects.eSearchButtonTop);
-    }
-
-    @And("user clicks on the Product displayed in the Search results")
-    public void userClicksOnTheProductDisplayedInTheSearchResults() {
-        scrollToElement(loginObjects.displayedProductTitle);
-        click(loginObjects.displayedProductTitle);
-    }
-
-    @And("user clicks on Add to Wish List option on a product that is displayed in the Related Products section of Product Display page")
-    public void userClicksOnAddToWishListOptionOnAProductThatIsDisplayedInTheRelatedProductsSectionOfProductDisplayPage() {
-        waitForVisibility(loginObjects.addToWishListButton);
-        click(loginObjects.addToWishListButton);
-        waitForVisibility(loginObjects.successAlertMessage);
-    }
-
-    @And("user clicks on the wish list! link in the displayed success message")
-    public void userClicksOnTheWishListLinkInTheDisplayedSuccessMessage() {
-        click(loginObjects.successAddToWishLink);
-        waitForVisibility(loginObjects.displayedProductOnWishList);
-    }
-
     @When("user login with username {string} and password {string}")
     public void userLoginWithUsernameAndPassword(String username, String password) {
         click(loginObjects.menuMyAccountLink);
@@ -152,5 +128,21 @@ public class LoginSteps extends BaseSteps {
         click(loginObjects.loginFormSubmitButton);
 
 
+    }
+
+    @Given("user clicks on Store Logo")
+    public void userClicksOnStoreLogo() {
+        click(loginObjects.eLogo);
+
+    }
+
+    @When("user scroll down till the Featured section on the Home page is displayed")
+    public void userScrollDownTillTheFeaturedSectionOnTheHomePageIsDisplayed() {
+        scrollToElement(loginObjects.featuredSection);
+    }
+
+    @And("user Selects {string} subcategory option from the left side options")
+    public void userSelectsSubcategoryOptionFromTheLeftSideOptions(String text) {
+        click(loginObjects.showAllDesktops);
     }
 }
