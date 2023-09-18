@@ -62,6 +62,24 @@ public class BaseSteps {
         click(element);
     }
 
+    public void hover(By locator) {
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        hover(element);
+    }
+
+    public void hover(WebElement element) {
+        wait.until(e -> {
+            try {
+                new Actions(e)
+                        .moveToElement(element)
+                        .perform();
+                return true;
+            } catch (Exception e1) {
+                return false;
+            }
+        });
+    }
+
     public void sendKeys(By locator, String text) {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         sendKeys(element, text);
@@ -106,9 +124,63 @@ public class BaseSteps {
     public void scrollToElement(WebElement element) {
         // Use JavaScript to scroll to the element
         waitForVisibility(element);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 
     }
 
+    public By getXpathOfButtonOfListedProduct(String text, int index) {
+        return By.xpath("//div[@class='product-thumb' and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+    public By getXpathOfLeftSideProduct(String text) {
+        return By.xpath("//div[@class='list-group']/a[contains(.,'" + text + "')]");
+    }
+
+    public By getXpathOfButtonOfListedProduct(String text, String button) {
+        int index = 3;
+        if (button.equalsIgnoreCase("wish")) {
+            index = 2;
+        }
+        if (button.equalsIgnoreCase("cart")) {
+            index = 1;
+        }
+        return By.xpath("//div[@class='product-thumb' and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+
+    public By getXpathOfButtonOfListedProduct(String text, Buttons button) {
+        int index = button.ordinal() + 1;
+        return By.xpath("//div[contains(@class,'product-thumb') and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+    public By getXpathOfNavigationBarComponents(Headers header) {
+        return By.xpath("//ul[contains(@class,'navbar')]/li[contains(.,'" + header + "')]");
+    }
+
+    public By getXpathOfNavigationBarComponents(String text) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return By.xpath("//ul[contains(@class,'navbar')]/*[contains(.,'" + text + "')]");
+    }
+
+    public enum Buttons {
+        cart,
+        wish,
+        compare;
+    }
+
+    public enum Headers {
+        Desktops,
+        Laptops,
+        Components,
+        Tablets,
+        Software,
+        Phones,
+        Cameras,
+        MP3;
+    }
 
 }
