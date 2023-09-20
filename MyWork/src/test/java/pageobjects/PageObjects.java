@@ -74,4 +74,6 @@ public class PageObjects {
     @FindBy(xpath = "//ul[contains(@class,'navbar')]/descendant::a[contains(.,'Show All Desktops')]")
     public WebElement showAllDesktops;
 
+    @FindBy(xpath = "//div[@id='content']/descendant::button[contains(@data-original-title,'Add to Wish List')]")
+    public WebElement AddToWishListButtonInProductPage;
 }
