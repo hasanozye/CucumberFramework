@@ -117,6 +117,9 @@ public class BaseSteps {
         return By.xpath(String.format(xpathStr, label));
     }
 
+    public void waitForVisibility(By locator){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
     public void waitForVisibility(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -148,9 +151,15 @@ public class BaseSteps {
     }
 
 
+
+
     public By getXpathOfButtonOfListedProduct(String text, Buttons button) {
         int index = button.ordinal() + 1;
         return By.xpath("//div[contains(@class,'product-thumb') and .//div[@class='caption' and .//*[contains(.,'" + text + "')]]]//button[" + index + "]");
+    }
+
+    public By getXpathOfUpsideHeaders(String text) {
+        return By.xpath("//div[@id='top-links']/descendant::a[contains(.,'" + text + "')]");
     }
 
     public By getXpathOfNavigationBarComponents(Headers header) {
