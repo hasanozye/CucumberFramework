@@ -10,4 +10,5 @@
 .gitignore
 /target/
 /test-output/
+/cucumber-reports/
 
