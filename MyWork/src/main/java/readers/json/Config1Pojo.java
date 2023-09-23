@@ -5,9 +5,9 @@ public class Config1Pojo {
     //Plain Old Java Objects
 
 
-    String url;
-    String username;
-    String password;
+    private String url;
+    private String username;
+    private String password;
 
     public String getUrl() {
         return url;
