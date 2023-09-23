@@ -1,10 +1,15 @@
 package utils;
 
 import driver.Driver;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -69,5 +74,61 @@ public class Utils {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static By getBy(String main, String sub) throws FileNotFoundException {
+
+        String jsonFile = "src/test/resources/datafiles/Elements.json";
+
+
+        JSONObject object = (JSONObject) JSONValue.parse(new FileReader(jsonFile));
+
+
+        JSONObject mainNode = (JSONObject) object.get(main);
+        JSONObject subNode = (JSONObject) mainNode.get(sub);
+
+//         get
+        String type = subNode.get("type").toString();
+        String locator = subNode.get("locator").toString();
+
+        switch (type) {
+            case "xpath" -> {
+                return By.xpath(locator);
+            }
+            case "css" -> {
+                return By.cssSelector(locator);
+            }
+            case "id" -> {
+                return By.id(locator);
+            }
+            case "tagname" -> {
+                return By.tagName(locator);
+            }
+            case "classname" -> {
+                return By.className(locator);
+            }
+            case "linktext" -> {
+                return By.linkText(locator);
+            }
+            case "partiallinktext" -> {
+                return By.partialLinkText(locator);
+            }
+            default -> {
+                return null;
+            }
+        }
+
+    }
+
+    public static String getValue(String main, String key) throws FileNotFoundException {
+
+        String jsonFile = "src/test/resources/datafiles/Elements.json";
+
+        JSONObject object = (JSONObject) JSONValue.parse(new FileReader(jsonFile));
+
+        JSONObject mainNode = (JSONObject) object.get(main);
+        return mainNode.get(key).toString();
+
+
     }
 }
