@@ -27,3 +27,17 @@ Feature: Wishlist
     And   user Selects "Mac" subcategory option from the left side options
     And   user add "Mac" to the wishList
 
+  @tc4
+  Scenario: wishList TC4
+    Given user search for "iMac"
+    When user scroll down and click to the "iMac"
+    And user add "iMac" to the wishList
+    And success notification with "wish list!" should be visible
+
+  @tc5
+  Scenario: wishList TC5
+    Given user search for "MacBook"
+    When user scroll down and click to the "MacBook"
+    And user add product to the wishList from product page
+    And user click on the "Wish List" header option
+
