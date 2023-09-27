@@ -7,7 +7,7 @@ Feature: login functionality
     Then login page should be visible
 
     When user fill the login form with the following datas
-      | username | xyzabc123@gmail.com |
-      | password | deneme              |
+      | username |        |
+      | password | deneme |
     And user clicks Login button
     Then login should be fail
