@@ -1,0 +1,85 @@
+
+fileName.feature
+    Gherkin dili ile yazilan scenario dosyalari
+
+fileName.properties
+    key = value
+
+fileName.yaml
+
+fileName.xml
+
+fileName.json
+
+    JSON : Javascript Object Notation
+    {
+        "key" : "value",
+        "key2" : "value"
+    }
+
+
+{
+    "name":"ali"
+}
+
+
+{
+    "name":"ali",
+    "lastname":"veli"
+}
+
+{
+    "user": {
+        "name" : "ali",
+        "lastname" : "veli"
+    }
+}
+
+{
+    "user1": {
+        "name" : "ali",
+        "lastname" : "veli"
+    },
+     "user1": {
+            "name" : "ali",
+            "lastname" : "veli"
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.  Maven projesi
+2.  pom->dependenceies -> selenium, testng, cucumber
+3.  https://www.saucedemo.com/
+4.  Feature'lar
+    Scenario
+        Login
+            Given User on homepage
+            When user login with data
+                |username |standard_user|
+                |password |secret_sauce |
+            Then login should be successfull
+5.  Runner ile run
+6.  Parallel run
+
+
+
+
+
+
