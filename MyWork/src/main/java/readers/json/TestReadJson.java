@@ -32,7 +32,7 @@ public class TestReadJson {
     @Test
     public void readConfig2() throws Exception {
         String file = "src/test/resources/datafiles/Config2.json";
-        JSONObject json2 = (JSONObject) new JSONParser().parse(new FileReader(file));
+//        JSONObject json2 = (JSONObject) new JSONParser().parse(new FileReader(file));
         JSONObject json = (JSONObject) new JSONParser().parse(new FileReader(file));
         System.out.println(json.get("types"));
 
