@@ -51,11 +51,26 @@ public class TestMapper {
 
     @Test
     public void testMapGeneral1(){
-        String file = "src/test/resources/datafiles/configders.json";
+        String file = "src/test/resources/datafiles/Config1.json";
 
-        ObjectMapper mapper = new ObjectMapper();
+//        ObjectMapper mapper = new ObjectMapper();
         MyJsonPojo pojo = new Config1PojoLombok();
+//        MyJsonPojo pojo2 = new ConfigPojo();
 
+        Config1PojoLombok data = (Config1PojoLombok) getPojo(file,pojo);
+        System.out.println(data.getUrl());
+    }
+
+    @Test
+    public void testMapGeneral2(){
+        String file = "src/test/resources/datafiles/config.json";
+
+//        ObjectMapper mapper = new ObjectMapper();
+        MyJsonPojo pojo = new ConfigPojo();
+//        MyJsonPojo pojo2 = new ConfigPojo();
+
+        ConfigPojo data = (ConfigPojo) getPojo(file,pojo);
+//        System.out.println(data.getUsers().get(0).getAddress().getCity());
     }
 
     public Object getPojo(String file, MyJsonPojo pojo){

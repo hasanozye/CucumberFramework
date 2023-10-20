@@ -26,4 +26,6 @@ public class ConfigPojo extends MyJsonPojo {
         private String username;
         private String password;
     }
+
+
 }
