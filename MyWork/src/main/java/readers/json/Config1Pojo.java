@@ -1,7 +1,7 @@
 package readers.json;
 
 public class Config1Pojo {
-    //pojo getter ve stter'i olan en basit java class'larıdır
+    //pojo getter ve setter'i olan en basit java class'larıdır
     //Plain Old Java Objects
 
 
