@@ -1,5 +1,6 @@
 package utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import driver.Driver;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.openqa.selenium.io.FileHandler;
+import readers.json.MyJsonPojo;
 
 public class Utils {
     /**
@@ -129,6 +131,27 @@ public class Utils {
         JSONObject mainNode = (JSONObject) object.get(main);
         return mainNode.get(key).toString();
 
+
+    }
+
+    /**
+     * bu method okunacak .json dosyasını pojo.class'a map eder.
+     * @param file okunacak json file
+     * @param pojo parent'i MyJsonPojo olan pojo class'i
+     * @return Object olarak return eder, işlem sırasında sub class'a cast edilmeli.
+     */
+    public static Object getPojo(String file, MyJsonPojo pojo){
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(new FileReader(file),pojo.getClass());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public MyJsonPojo t1(String jsonFile, MyJsonPojo pojo) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(new FileReader(jsonFile), pojo.getClass());
 
     }
 }
