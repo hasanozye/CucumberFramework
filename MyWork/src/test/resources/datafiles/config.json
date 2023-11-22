@@ -1,27 +1,31 @@
 {
-  "address": {
-    "state": "NY",
-    "city": "New York",
-    "streetAddress": "21 2nd Street",
-    "okul": "okul",
-    "postalCode": 10021
-  },
-  "adi": "John",
-  "soyadi": "Smith",
-  "memleket": "Ist",
-  "age": 25,
-  "phoneNumbers": [
+  "url": "https://opencart.abstracta.us/",
+  "username": "deneme@deneme.com",
+  "password": "deneme",
+  "takescreenshot": true,
+  "takescreenshotOn": "fail",
+  "users": [
     {
-      "type": "home",
-      "number": "212 555-1234"
+      "type": "user",
+      "valid": true,
+      "username": "deneme",
+      "password": "deneme",
+      "adress": {
+        "city": "Istanbul",
+        "cadde": "istiklal",
+        "numara": 1
+      }
     },
     {
-      "type": "fax",
-      "number": "212 555-1234"
-    },
-    {
-      "type": "mobil",
-      "number": "212 555-1234"
+      "type": "user",
+      "valid": "false",
+      "username": "deneme1@deneme.com",
+      "password": "deneme",
+      "adress": {
+        "city": "Istanbul",
+        "cadde": "istiklal",
+        "numara": 2
+      }
     }
   ]
 }
