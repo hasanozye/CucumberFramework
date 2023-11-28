@@ -2,16 +2,14 @@ package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import driver.Driver;
+import org.apache.poi.ss.usermodel.*;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,6 +17,9 @@ import org.openqa.selenium.io.FileHandler;
 import readers.json.MyJsonPojo;
 
 public class Utils {
+
+    private static final String ENTER = "\n";
+
     /**
      * takescreenshots
      */
@@ -136,14 +137,15 @@ public class Utils {
 
     /**
      * bu method okunacak .json dosyasını pojo.class'a map eder.
+     *
      * @param file okunacak json file
      * @param pojo parent'i MyJsonPojo olan pojo class'i
      * @return Object olarak return eder, işlem sırasında sub class'a cast edilmeli.
      */
-    public static Object getPojo(String file, MyJsonPojo pojo){
+    public static Object getPojo(String file, MyJsonPojo pojo) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(new FileReader(file),pojo.getClass());
+            return mapper.readValue(new FileReader(file), pojo.getClass());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -153,5 +155,50 @@ public class Utils {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(new FileReader(jsonFile), pojo.getClass());
 
+    }
+
+    /**
+     * özel bir excel dosyasinda yazili gherkin satirlarindan feature file olusturma.
+     *
+     * @param excelFile   gherkin olan excel dosyasi
+     * @param featureFile olusturulacak feature dosya adi
+     */
+    public static void createFeatureFileFromExcel(String excelFile, String featureFile) {
+        try {
+            FileWriter fileWriter = new FileWriter(featureFile);
+
+            // java excel'i okudu
+            FileInputStream fileInputStream = new FileInputStream(excelFile);
+
+            // Apache poi excel'i workbook olarak tanidi
+            Workbook workbook = WorkbookFactory.create(fileInputStream);
+
+            // ilk sayfa okundu
+            Sheet sheet = workbook.getSheetAt(0);
+
+            // row sayisi alindi
+            int rowNums = sheet.getPhysicalNumberOfRows();
+
+            String featureLine = "Feature: " + sheet.getRow(1).getCell(0).toString();
+            fileWriter.write(featureLine + ENTER);
+
+            String scenarioLine = sheet.getRow(1).getCell(1).toString();
+            scenarioLine += ":";
+            scenarioLine += sheet.getRow(1).getCell(2).toString();
+
+            fileWriter.write(scenarioLine + ENTER);
+
+            for (int i = 1; i < rowNums; i++) {
+                Cell cell = sheet.getRow(i).getCell(3);
+                String str = cell == null ? "" : cell.toString();
+                fileWriter.write(str + ENTER);
+            }
+            workbook.close();
+            fileInputStream.close();
+            fileWriter.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
