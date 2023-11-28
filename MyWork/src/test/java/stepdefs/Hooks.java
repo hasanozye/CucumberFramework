@@ -28,6 +28,12 @@ public class Hooks {
         }
     }
 
+    /*@AfterStep
+    public void afterStep(Scenario scenario){
+        boolean excelLog = PropertyReader.read().get("excelLog").equalsIgnoreCase("true");
+        if (excelLog)
+    }*/
+
     @After(order = 0)
     public void after() {
         Driver.quitDriver();
